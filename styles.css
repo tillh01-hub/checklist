@@ -1,145 +1,90 @@
-/* Reset & basic layout */
-* { box-sizing: border-box; margin:0; padding:0; }
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(160deg, #0f172a, #1e293b);
-  color: #f1f5f9;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+:root{
+  --red:#e50914;
+  --red-deep:#b0070f;
+  --bg:#000000; /* AMOLED black */
+  --card:#080808;
+  --muted:#9a9a9a;
+  --white:#ffffff;
+  --radius:16px;
+  --shadow: 0 8px 30px rgba(0,0,0,0.6);
 }
 
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #1e293b;
-  padding: 15px 20px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-  position: sticky;
-  top:0;
-  z-index: 10;
+/* base */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--white);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+  padding:16px;
+  -webkit-font-smoothing:antialiased;
 }
 
-.topbar h1 {
-  font-size: 1.5rem;
-  color: #f8fafc;
+/* header */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  padding:14px; border-radius:14px; box-shadow:var(--shadow); margin-bottom:18px;
+}
+.topbar h1{font-size:1.2rem; letter-spacing:0.6px}
+.edit-link{
+  background:linear-gradient(90deg,var(--red),var(--red-deep));
+  padding:8px 12px;border-radius:12px;color:var(--white);text-decoration:none;
+  font-weight:600; box-shadow:0 6px 18px rgba(229,9,20,0.18);
 }
 
-.edit-link {
-  font-size: 1.4rem;
-  color: #3b82f6;
-  text-decoration: none;
+/* card */
+.card{
+  background:var(--card); padding:18px; border-radius:18px; box-shadow:var(--shadow);
+  transform-origin:center; transition:transform 420ms cubic-bezier(.2,.9,.2,1), opacity 260ms ease;
 }
 
-.edit-link:hover { transform: scale(1.1); transition: 0.2s; }
+/* buttons */
+.btn{border:0;padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer}
+.btn-day{background:linear-gradient(90deg,var(--red),var(--red-deep)); color:var(--white)}
+.btn-night{background:var(--white); color:var(--bg)}
+.btn.small{padding:8px 10px;font-weight:600}
 
-.app {
-  flex: 1;
-  padding: 15px;
-  max-width: 600px;
-  margin: 0 auto;
-  width: 100%;
+/* list */
+.list{list-style:none;padding:0;margin-top:14px}
+.list li{
+  display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;margin-bottom:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-left:4px solid rgba(229,9,20,0.9);
+  box-shadow:0 8px 20px rgba(0,0,0,0.6);
+  touch-action: pan-y;
+  transition: transform 380ms cubic-bezier(.22,.9,.25,1), box-shadow 200ms ease, opacity 200ms ease;
+  position:relative; overflow:hidden;
 }
+.list li:hover{ transform: translateY(-4px) scale(1.01); box-shadow:0 18px 40px rgba(0,0,0,0.7) }
+.list li.dragging{ opacity:0.6; transform: scale(0.985); }
+.list li.done{ opacity:0.45; text-decoration:line-through; }
 
-/* Cards */
-.card {
-  background: #1e293b;
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+/* checkbox wrapper */
+.checkboxWrap{ width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:10px;
+  background:transparent;border:2px solid rgba(255,255,255,0.06); flex-shrink:0; transition: background 220ms ease, transform 200ms cubic-bezier(.2,.9,.2,1);
 }
+.checkboxWrap.checked{ background:linear-gradient(90deg,var(--red),var(--red-deep)); border-color:transparent; transform: scale(1.04); }
 
-/* Buttons */
-.btn {
-  cursor: pointer;
-  padding: 12px 20px;
-  margin:5px;
-  border-radius: 12px;
-  border: none;
-  font-size: 1rem;
-  transition: all 0.2s ease;
-}
+/* hide native input if present */
+.list input[type="checkbox"]{ display:none; }
 
-.btn:hover { transform: scale(1.05); }
+/* animated SVG checkmark */
+.checkmark{ width:20px;height:20px; fill:var(--white); stroke:none; transform-origin:center; opacity:0; transition: opacity 220ms ease; }
+.checkboxWrap.checked .checkmark{ opacity:1; transform: scale(1); }
 
-.btn-day { background: #facc15; color:#1e293b; }
-.btn-night { background: #2563eb; color:white; }
+/* swipe visual */
+.swipe-left{ transform: translateX(-68px) rotate(-2deg); opacity:0.95; background:linear-gradient(90deg,#2b0000,#400000) }
+.swipe-right{ transform: translateX(68px) rotate(2deg); opacity:0.95; background:linear-gradient(90deg,#003b00,#005500) }
 
-.btn.small {
-  padding: 6px 12px;
-  font-size: 0.9rem;
-}
+/* text */
+.text{ flex:1; font-size:1rem; line-height:1.2 }
 
-/* Row */
-.row { display:flex; justify-content:center; flex-wrap: wrap; }
+/* mobile hint */
+.mobile-hint{ text-align:center;color:var(--muted);margin-top:8px;font-size:0.9rem }
 
-/* Checklist */
-.list {
-  list-style: none;
-  margin-top: 15px;
-  padding: 0;
-}
-
-.item {
-  display: flex;
-  align-items: center;
-  padding: 12px;
-  margin-bottom: 10px;
-  background: #334155;
-  border-radius: 15px;
-  cursor: grab;
-  transition: all 0.2s ease;
-}
-
-.item.dragging { opacity: 0.6; transform: scale(1.02); }
-
-.item input[type="checkbox"] {
-  width: 22px;
-  height: 22px;
-  margin-right: 12px;
-  accent-color: #3b82f6;
-  cursor: pointer;
-}
-
-.item.done .text {
-  text-decoration: line-through;
-  opacity: 0.6;
-  transition: 0.3s;
-}
-
-.text { flex:1; font-size:1rem; word-break: break-word; }
-
-.mobile-hint {
-  margin-top: 8px;
-  font-size: 0.8rem;
-  color: #94a3b8;
-  text-align: center;
-}
-
-/* Header row */
-.header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.actions { display: flex; gap: 10px; flex-wrap: wrap; }
-
-.subtext { font-size: 0.9rem; color: #94a3b8; }
-
-/* Animations */
-.animate-fade { opacity:0; animation: fadeIn 0.5s forwards; }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive */
-@media (max-width:480px){
-  .btn { width: 100%; text-align:center; }
-  .header-row { flex-direction: column; gap: 10px; }
+/* responsive */
+@media (max-width:520px){
+  .topbar{ padding:12px }
+  .btn{ padding:10px;border-radius:10px;font-size:0.95rem }
 }
