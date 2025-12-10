@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Photo Mailer — Upload & Email</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header class="topbar">
+    <h1>Photo Mailer</h1>
+    <p class="muted">Group photos under headings and email them.</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Create sub-heading</h2>
+      <div class="row">
+        <input id="headingInput" placeholder="Sub-heading name (e.g. 'Vacation 2025')" />
+        <button id="addHeadingBtn" class="btn">Add</button>
+      </div>
+
+      <div id="headingsList" class="headings"></div>
+    </section>
+
+    <section class="card">
+      <h2>Preview</h2>
+      <div id="previewArea" class="preview"></div>
+    </section>
+
+    <section class="card">
+      <h2>Send</h2>
+      <label>Recipient email
+        <input id="recipient" placeholder="you@example.com" type="email"/>
+      </label>
+      <label>Optional message
+        <textarea id="message" placeholder="Optional message to include in the email"></textarea>
+      </label>
+
+      <div class="row">
+        <button id="sendBtn" class="btn primary">Send Email</button>
+        <div id="status" class="muted"></div>
+      </div>
+    </section>
+  </main>
+
+<script src="main.js"></script>
+</body>
+</html>
