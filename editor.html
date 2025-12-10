@@ -1,37 +1,33 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edit Weekly Checklists</title>
-  <link rel="stylesheet" href="editor.css" />
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Edit — Weekly Checklist</title>
+<link rel="stylesheet" href="editor.css">
 </head>
 <body>
+<header class="topbar"><h1>Edit Checklists</h1><a href="index.html">Back</a></header>
+<main class="container">
+  <div class="controls card">
+    <label>Weekday:
+      <select id="weekday"></select>
+    </label>
+    <label>Mode:
+      <select id="modeSel"><option value="day">day</option><option value="night">night</option></select>
+    </label>
+  </div>
 
-<h1>Edit Weekly Checklists</h1>
+  <section class="card">
+    <h3 id="which"></h3>
+    <ul id="editList" class="edit-list"></ul>
 
-<div class="container">
-
-  <label>Weekday:</label>
-  <select id="weekday"></select>
-
-  <label>Mode:</label>
-  <select id="modeSel">
-    <option value="day">Day</option>
-    <option value="night">Night</option>
-  </select>
-
-  <h2 id="which"></h2>
-
-  <ul id="editList"></ul>
-
-  <input id="newText" type="text" placeholder="Add item..." />
-  <button id="addBtn">Add</button>
-
-</div>
-
-<a class="back" href="index.html">Back to Checklist</a>
-
+    <div class="add-row">
+      <input id="newText" placeholder="New item..." />
+      <button id="addBtn">Add</button>
+    </div>
+  </section>
+  <div class="muted">Each weekday + mode has its own checklist. Changes save automatically.</div>
+</main>
 <script src="editor.js"></script>
 </body>
 </html>
